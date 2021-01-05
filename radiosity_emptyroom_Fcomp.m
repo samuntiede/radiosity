@@ -6,15 +6,21 @@
 %% Preliminaries
 
 % Choose mosaic resolution. Each wall, floor anf roof surface will be
-% divided into n x n square-shaped patches. See 
+% divided into n x n square-shaped patches. Value n=10 is good for making 
+% quick tests. Bigger n gives more details, but also the calculation and
+% rendering becomes more heavy for the computer. For my computational
+% equipment n=48 is about the biggest n I can use without running out of
+% memory. 
 n = 10;
 
 % Choose integration quadrature parameter. Integrals over pixels are
-% implemented as midpoint rule using qn x qn sub-pixels of constant size
+% implemented as midpoint rule using qn x qn sub-pixels of constant size. 
+% A good starting value is qn = 3; you might use a higher value as well but
+% it will slow down the computation a lot. 
 qn = 3;
 
-% Construct centerpoints of the mosaic tiles.
-% The letter d denotes the length of the side of a pixel.
+% Construct centerpoints of the mosaic tiles (patches).
+% The letter d denotes the length of the side of a patch.
 d        = 2/n;
 tmp      = -1-d/2 + [1:n]*d;
 
