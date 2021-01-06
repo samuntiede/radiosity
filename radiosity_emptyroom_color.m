@@ -11,7 +11,23 @@ disp('Loading data')
 load data/F_emptyroom F n qn d Xmat Ymat Zmat 
 disp('Data loaded')
 
+% Adjust the dark shades. Colors darker than the threshold will become
+% black, so increasing the threshold will darken the image. 
+threshold = 0.05;
 
+% Sigmoid correction for optimal gray levels. Increasing betapar1 will
+% darken the image, especially the shadows. Increasing betapar2 will
+% lighten the image, especially highlights. 
+betapar1 = 1;
+betapar2 = 10;
+
+% Camera settings. The camera is located at vector "campos", it is pointed
+% towards "camtar", and the view angle is "camang". A larger "camang" value
+% will give a more "wide-angle lens", so more of the scene is seen in the
+% image. 
+campos = [.2 -2.3 -.30];
+camtar = [0 0 0];
+camang = 70;
 
 %% Construct the color vector (B-vector) using the radiosity lighting model.
 
@@ -52,14 +68,11 @@ disp(['Radiosity equation solved in ',num2str(toc),' seconds'])
 
 % Adjust the dark shades and normalize the values of the color vector 
 % between 0 and 1.
-threshold = 0.05;
 colorvec = colorvec_orig-threshold;
 colorvec = max(0,colorvec);
 colorvec = colorvec/max(colorvec);
 
 % Sigmoid correction for optimal gray levels.
-betapar1 = 1;
-betapar2 = 10;
 colorvec  = betacdf(colorvec,betapar1,betapar2);
 % figure(100)
 % clf
@@ -155,7 +168,7 @@ end
 
 % Camera settings
 camproj('perspective')
-set(gca,'CameraPosition',[-.2 -3 -.30],'CameraTarget',[0 0 .1],'CameraViewAngle',50)
+set(gca,'CameraPosition',campos,'CameraTarget',camtar,'CameraViewAngle',camang)
 
 % Axis settings
 axis equal
