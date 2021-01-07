@@ -1,7 +1,7 @@
 % Further testing for building a radiosity lighting method for virtual
-% spaces.
+% spaces. Here the room has an extra wall. 
 %
-% Samuli Siltanen November 2020
+% Samuli Siltanen January 2021
 
 %% Preliminaries
 
