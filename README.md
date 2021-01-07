@@ -10,3 +10,7 @@ First run "radiosity_emptyroom_Fcomp.m" in Matlab to create the geometric form f
 2. Another example: room with a dividing wall. 
 
 First run "radiosity_wall_Fcomp.m" in Matlab to create the geometric form factor matrix F, which will be saved to a file in the subfolder ./data/. Then you can run "radiosity_wall_color.m" to create a color image. If you want more details (smaller patches), you can make halfn larger in "radiosity_wall_Fcomp.m". Note that too large halfn value will cause your computer to run out of memory, so it is a good idea to increase halfn gradually. 
+
+3. Third example: room with a (levitating) table. 
+
+Coming up.
