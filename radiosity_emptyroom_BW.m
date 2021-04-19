@@ -11,6 +11,18 @@ disp('Loading data')
 load data/F_emptyroom F n qn d Xmat Ymat Zmat 
 disp('Data loaded')
 
+% Sigmoid correction for optimal gray levels. Experiment with the two
+% values to find good 
+% betapar1 = 2;
+% betapar2 = 10;
+% figure(100)
+% clf
+% t = linspace(0,1,200);
+% plot(t,betacdf(t,betapar1,betapar2));
+% title('Grayscale adjustment curve')
+% Construct grayscale color matrix by repeating the same color vector for
+% red, green and blue channels.
+
 
 
 %% Construct the color vector (B-vector) using the radiosity lighting model.
@@ -22,7 +34,7 @@ disp('Data loaded')
 Evec   = zeros(6*n^2,1);
 indvec = repmat(logical(0),size(Evec));
 indvec(n^2+[1:n^2]) = sqrt((Xmat(:,2)-.3).^2+Ymat(:,2).^2)<.3; % Ceiling lamp
-% indvec(4*n^2+[1:n^2]) = ...
+indvec(4*n^2+[1:n^2]) = ...
     ((abs(Zmat(:,5)-0)<.3)&(abs(Ymat(:,5)-0)<.1))|...
     ((abs(Zmat(:,5)-0)<.3)&(abs(Ymat(:,5)-1/2)<.1))|...
     ((abs(Zmat(:,5)-0)<.3)&(abs(Ymat(:,5)+1/2)<.1)); % Rectangular lamps in the left wall
@@ -48,6 +60,7 @@ colorvec_orig = gmres(eye(6*n^2)-repmat(rho,1,6*n^2).*F,Evec);
 disp(['Radiosity equation solved in ',num2str(toc),' seconds'])
 
 
+
 %% Produce a still image of the scene
 
 % Adjust the dark shades and normalize the values of the color vector 
@@ -58,16 +71,8 @@ colorvec = max(0,colorvec);
 colorvec = colorvec/max(colorvec);
 
 % Sigmoid correction for optimal gray levels.
-betapar1 = 1;
-betapar2 = 22;
 colorvec  = betacdf(colorvec,betapar1,betapar2);
-% figure(100)
-% clf
-% t = linspace(0,1,200);
-% plot(t,betacdf(t,betapar1,betapar2));
-% title('Grayscale adjustment curve')
-% Construct grayscale color matrix by repeating the same color vector for
-% red, green and blue channels.
+
 
 
 % Construct color matrix, containing only shades of gray
@@ -97,6 +102,17 @@ for iii = 1:(n^2)
     % so no boundaries are visible.
     set(p1,'EdgeColor',colormat(colorind,:))
     colorind = colorind+1;
+    
+
+    % Camera settings
+    % camproj('perspective')
+    % set(gca,'CameraPosition',[-.2 -3 -.30],'CameraTarget',[0 0 .1],'CameraViewAngle',50)
+    %
+    % % Axis settings
+    % axis equal
+    % axis off
+    % drawnow
+    %     pause
 end
 
 % Roof
@@ -108,6 +124,17 @@ for iii = 1:(n^2)
         colormat(colorind,:));
     set(p1,'EdgeColor',colormat(colorind,:))
     colorind = colorind+1;
+    
+    
+    % Camera settings
+%     camproj('perspective')
+%     set(gca,'CameraPosition',[-.2 -3 -.30],'CameraTarget',[0 0 .1],'CameraViewAngle',50)
+%     
+%     % Axis settings
+%     axis equal
+%     axis off
+%     drawnow
+%     pause
 end
 
 % Floor

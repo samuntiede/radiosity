@@ -1,7 +1,7 @@
 % Calculate the F matrix for the cube room with all six square walls.
 % See the video https://youtu.be/krIVZvzlxUQ
 %
-% Samuli Siltanen January 2021
+% Samuli Siltanen April 2021
 
 %% Preliminaries
 
@@ -11,7 +11,7 @@
 % rendering becomes more heavy for the computer. For my computational
 % equipment n=48 is about the biggest n I can use without running out of
 % memory. 
-n = 10;
+n = 5;
 
 % Choose integration quadrature parameter. Integrals over pixels are
 % implemented as midpoint rule using qn x qn sub-pixels of constant size. 
