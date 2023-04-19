@@ -1,7 +1,7 @@
 % Calculate the F matrix for the cube room with all six square walls.
 % See the video https://youtu.be/krIVZvzlxUQ
 %
-% Samuli Siltanen April 2021
+% Samuli Siltanen April 2023
 
 %% Preliminaries
 
@@ -9,9 +9,9 @@
 % divided into n x n square-shaped patches. Value n=10 is good for making 
 % quick tests. Bigger n gives more details, but also the calculation and
 % rendering becomes more heavy for the computer. For my computational
-% equipment n=48 is about the biggest n I can use without running out of
+% equipment n=48 is about the biggest "n" I can use without running out of
 % memory. 
-n = 5;
+n = 15;
 
 % Choose integration quadrature parameter. Integrals over pixels are
 % implemented as midpoint rule using qn x qn sub-pixels of constant size. 
@@ -799,7 +799,7 @@ for iii = 1:n^2
         end
     end
 end
-disp('Geometric view factors front->right done (15/15)')
+disp('Geometric view factors front->left done (15/15)')
 
 
 % Use symmetry to finish the construction of F. F is symmetric
