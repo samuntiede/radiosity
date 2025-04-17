@@ -13,8 +13,8 @@ disp('Data loaded')
 
 % Sigmoid correction for optimal gray levels. Experiment with the two
 % values to find good 
-% betapar1 = 2;
-% betapar2 = 10;
+betapar1 = 2;
+betapar2 = 10;
 % figure(100)
 % clf
 % t = linspace(0,1,200);
@@ -71,7 +71,7 @@ colorvec = max(0,colorvec);
 colorvec = colorvec/max(colorvec);
 
 % Sigmoid correction for optimal gray levels.
-colorvec  = betacdf(colorvec,betapar1,betapar2);
+colorvec  = Scaled_BetaCDF(colorvec,betapar1,betapar2);
 
 
 

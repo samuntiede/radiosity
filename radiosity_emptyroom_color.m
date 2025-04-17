@@ -73,7 +73,7 @@ colorvec = max(0,colorvec);
 colorvec = colorvec/max(colorvec);
 
 % Sigmoid correction for optimal gray levels.
-colorvec  = betacdf(colorvec,betapar1,betapar2);
+colorvec  = Scaled_BetaCDF(colorvec,betapar1,betapar2);
 % figure(100)
 % clf
 % t = linspace(0,1,200);
