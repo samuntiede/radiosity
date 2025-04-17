@@ -18,7 +18,7 @@ betapar2 = 17;
 % figure(100)
 % clf
 % t = linspace(0,1,200);
-% plot(t,betacdf(t,betapar1,betapar2));
+% plot(t,Scaled_BetaCDF(t,betapar1,betapar2));
 % title('Grayscale adjustment curve')
 % Construct grayscale color matrix by repeating the same color vector for
 % red, green and blue channels.
@@ -77,7 +77,7 @@ for iter = 1:20
     colorvec = colorvec/max(colorvec);
     
     % Sigmoid correction for optimal gray levels.
-    colorvec  = betacdf(colorvec,betapar1,betapar2);
+    colorvec  = Scaled_BetaCDF(colorvec,betapar1,betapar2);
     
     
     
